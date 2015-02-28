@@ -7,7 +7,7 @@ public class Lotto {
 //-----------------------------------------------------------------------------
 	public static void main(String[] args) {
 		
-		int digits = 0, smallest = 0, largest = 0, range, index;
+		int digits = 0, smallest = 0, largest = 0;
 		char choice;
 		boolean success;
 		
@@ -80,7 +80,7 @@ public class Lotto {
 	private static int numberGenerator(int small, int large) {
 		//Range sets Math.random's [0,1) range to the range needed for the
 		//lotto numbers.
-		range = large - small;
+		int range = large - small;
 		
 		return (int)((Math.random() * range) + small);
 	}
