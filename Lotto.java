@@ -14,41 +14,14 @@ public class Lotto {
 		do {
 			
 			digits = getNumber("How many play numbers? : ");
-			
 			smallest = getNumber("What is the smallest playable number? : ");
-			
 			largest = getNumber("What is the largest playable number? : ");
 			
 			//Creates array with length equal to amount of play numbers.
-			int[] numbers = new int[digits];
+			int[] numbers = getLottoNumbers(digits, smallest, largest);
 			
-			//Range sets Math.random's [0,1) range to the range needed for the
-			//lotto numbers.
-			range = largest - smallest;
-			
-			for (index = 0; index < numbers.length; index++) {
-				numbers[index] = (int)((Math.random() * range) + smallest);
-				if (digits == 6) {
-					//If the largest number is 59, the Powerball lotto is
-					//assumed, keeping the last digit in Powerball's range.
-					if (largest == 59) {
-						if (numbers[numbers.length-1] > 39) {
-							numbers[numbers.length-1] = 
-									numbers[numbers.length-1]/4;
-						}
-					}
-					//If the largest number is 59, the Mega Million lotto is
-					//assumed, keeping the last digit in Mega ball's range.
-					if (largest == 75) {
-						if (numbers[numbers.length-1] > 15) {
-							numbers[numbers.length-1] = 
-									numbers[numbers.length-1]/5;
-						}
-					}
-				}
-				//Prints the lotto numbers.
-				System.out.print(numbers[index] + " ");
-			}
+			// Prints Lotto numbers
+			printLottoNumbers(numbers, digits);
 			
 			//Asks if user wants to print more numbers.
 			System.out.println();
@@ -75,7 +48,7 @@ public class Lotto {
 		boolean success;
 		int number = 0;
 		
-		// Prompts user for starting number. Exception/While loop 
+		// Prompts user for number. Exception/While loop 
 		// catches inputs that aren't proper integers.
 		success = false;
 		while (!success) {
@@ -91,6 +64,32 @@ public class Lotto {
 		}
 		
 		return number;
+	}
+//-----------------------------------------------------------------------------
+	private static int[] getLottoNumbers(int digits, int small, int large) {
+		int[] lottoNumbers = new int[digits];
+		
+		// Populates array with lottery numbers.
+		for (int i = 0; i < digits; i++) {
+			lottoNumbers[i] = numberGenerator(small, large);
+		}
+		
+		return lottoNumbers;
+	}	
+//-----------------------------------------------------------------------------
+	private static int numberGenerator(int small, int large) {
+		//Range sets Math.random's [0,1) range to the range needed for the
+		//lotto numbers.
+		range = large - small;
+		
+		return (int)((Math.random() * range) + small);
+	}
+//-----------------------------------------------------------------------------
+	private static void printLottoNumbers(int[] lottoNumbers, int digits) {
+		// Loops through array to print lotto numbers.
+		for (int i = 0; i < digits; i++) {
+			System.out.print(lottoNumbers[i] + " ");
+		}
 	}
 //-----------------------------------------------------------------------------
 }
