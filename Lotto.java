@@ -12,50 +12,12 @@ public class Lotto {
 		boolean success;
 		
 		do {
-			//Gets amount of play numbers. Exception/While loop catches inputs
-			//that aren't numerals.
-			success = false;
-			while (!success) {
-				try {
-					System.out.print("How many play numbers? : ");
-					digits = keyboard.nextInt();
-					success = true;
-				} catch (InputMismatchException e) {
-					System.out.println("Please input a proper numeral.");
-					keyboard.nextLine();
-					System.out.println();
-				}
-			}
 			
-			//Gets the smallest play number. Exception/While loop catches
-			//inputs that aren't numerals.
-			success = false;
-			while (!success) {
-				try {
-					System.out.print("What is the smallest playable number? : ");
-					smallest = keyboard.nextInt();
-					success = true;
-				} catch (InputMismatchException e) {
-					System.out.println("Please input a proper numeral.");					
-					keyboard.nextLine();
-					System.out.println();
-				}
-			}
+			digits = getNumber("How many play numbers? : ");
 			
-			//Gets the largest play number. Exception/While loop catches
-			//inputs that aren't numerals.
-			success = false;
-			while (!success) {
-				try {
-					System.out.print("What is the largest playable number? : ");
-					largest = keyboard.nextInt();
-					success = true;
-				} catch (InputMismatchException e) {
-					System.out.println("Please input a proper numeral.");
-					keyboard.nextLine();
-					System.out.println();
-				}
-			}
+			smallest = getNumber("What is the smallest playable number? : ");
+			
+			largest = getNumber("What is the largest playable number? : ");
 			
 			//Creates array with length equal to amount of play numbers.
 			int[] numbers = new int[digits];
@@ -102,6 +64,33 @@ public class Lotto {
 		} while (choice != 'N');
 		
 		System.out.print("I hope you win something!");
+	}
+//-----------------------------------------------------------------------------
+	/**
+	 * 
+	 * @return Returns user's number input
+	 * @author Sherman Hewitt
+	 */
+	private static int getNumber(String prompt) {
+		boolean success;
+		int number = 0;
+		
+		// Prompts user for starting number. Exception/While loop 
+		// catches inputs that aren't proper integers.
+		success = false;
+		while (!success) {
+			try {
+				System.out.print(prompt);
+				number = keyboard.nextInt();
+				success = true;
+			} catch (InputMismatchException e) {
+				keyboard.nextLine();
+			} catch (NumberFormatException e) {
+				keyboard.nextLine();
+			}
+		}
+		
+		return number;
 	}
 //-----------------------------------------------------------------------------
 }
