@@ -1,6 +1,14 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
 //=============================================================================
+/**
+ * This class implements a lottery number generator. It does not take into account
+ * instances where lottery games have special rules for one of the 
+ * lottery numbers. For example, a six-number lottery may have choices 1-60 for
+ * the first five numbers, but only have choices 1-20 for the last number.
+ * @author Sherman Hewitt
+ * @version 1.0
+ */
 public class Lotto {
 //-----------------------------------------------------------------------------
 	private static Scanner keyboard = new Scanner(System.in);
@@ -40,8 +48,11 @@ public class Lotto {
 	}
 //-----------------------------------------------------------------------------
 	/**
-	 * 
-	 * @return Returns user's number input
+	 * This prompts the user to input a number. A while loop with try...catch
+	 * blocks stops users from inputing invalid responses.
+	 * @param prompt Message that program displays to user when asking for 
+	 * number
+	 * @return User's number input
 	 * @author Sherman Hewitt
 	 */
 	private static int getNumber(String prompt) {
@@ -66,6 +77,14 @@ public class Lotto {
 		return number;
 	}
 //-----------------------------------------------------------------------------
+	/**
+	 * This populates the array with randomized lottery numbers.
+	 * @author Sherman Hewitt
+	 * @param digits Number of lottery numbers
+	 * @param small Smallest lottery number choice
+	 * @param large Largest lottery number choice
+	 * @return Array of lottery numbers
+	 */
 	private static int[] getLottoNumbers(int digits, int small, int large) {
 		int[] lottoNumbers = new int[digits];
 		
